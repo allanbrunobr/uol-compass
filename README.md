@@ -1,6 +1,6 @@
-# Projeto: Sistema de Mensageria com RabbitMQ, Kafka, SQS e PubSub
+# Projeto: Sistema de Mensageria com RabbitMQ, Kafka, SQS e Zookeeper
 
-Este projeto é um sistema de mensageria que utiliza RabbitMQ, SQS (AWS Simple Queue Service), Kafka e GCP Pub/Sub, configurado para ser executado usando Docker. Abaixo você encontrará as instruções para baixar o código, configurar as credenciais da AWS e iniciar o ambiente Docker.
+Este projeto é um sistema de mensageria que utiliza RabbitMQ, Kafka, SQS (AWS Simple Queue Service) e Zookeeper, configurado para ser executado usando Docker. Abaixo você encontrará as instruções para baixar o código, configurar as credenciais da AWS e iniciar o ambiente Docker.
 
 ## Requisitos
 
@@ -9,6 +9,7 @@ Antes de começar, você precisará ter as seguintes ferramentas instaladas:
 - [Git](https://git-scm.com/)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
+- [Gradle](https://gradle.org/install/)
 
 ## Passos para Configuração
 
@@ -17,7 +18,7 @@ Antes de começar, você precisará ter as seguintes ferramentas instaladas:
 Primeiro, clone o repositório do projeto em seu ambiente local. No terminal, execute o comando abaixo:
 
 ```bash
-git clone https://github.com/allanbrunobr/seu-repositorio.git
+git clone https://github.com/seu-usuario/seu-repositorio.git
 ```
 
 Navegue para o diretório do projeto:
@@ -94,7 +95,86 @@ Aqui você poderá ver as filas e mensagens do RabbitMQ.
 
 Os tópicos Kafka são criados automaticamente ao iniciar o Kafka, com base no script `create-topics.sh` incluído no projeto. Este script é executado automaticamente no container Kafka.
 
-### 5. Encerramento
+### 5. Iniciar a Aplicação Spring Boot
+
+#### 5.1 Executar a Aplicação Localmente com Gradle
+
+No diretório raiz do projeto, execute o seguinte comando para iniciar a aplicação Spring Boot com Gradle:
+
+```bash
+./gradlew bootRun
+```
+
+Isso iniciará a aplicação Spring Boot, que se conectará aos serviços de mensageria (RabbitMQ, Kafka, Zookeeper e SQS) que você configurou anteriormente com Docker.
+
+#### 5.2 Verificar se a Aplicação Está Rodando
+
+Após iniciar o Spring Boot, você pode verificar se a aplicação está funcionando corretamente acessando o seguinte endpoint:
+
+```
+http://localhost:8080/api/avaliacoes/status
+```
+
+Se tudo estiver correto, você verá uma mensagem de status indicando que o serviço está operacional.
+
+### 6. Realizar Pesquisas e Pagamentos via cURL e Postman
+
+#### 6.1 Pesquisar Vendedor
+
+Para buscar informações sobre um vendedor, você pode usar a seguinte requisição `GET`:
+
+##### cURL:
+```bash
+curl -X GET "http://localhost:8080/api/vendedores/{id}" -H "accept: application/json"
+```
+
+Substitua `{id}` pelo ID do vendedor que deseja pesquisar.
+
+##### Postman:
+- Método: `GET`
+- URL: `http://localhost:8080/api/vendedores/{id}`
+- Substitua `{id}` pelo ID do vendedor.
+- Clique em "Send" para executar a requisição.
+
+#### 6.2 Realizar Pagamento
+
+Para enviar um pagamento, use a seguinte requisição `POST` com o corpo JSON:
+
+##### cURL:
+```bash
+curl -X POST "http://localhost:8080/api/avaliacoes" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "codigoVendedor": 1,
+           "pagamentos": [
+             {
+               "codigoCobranca": 1,
+               "valorPagamento": 100.00
+             }
+           ]
+         }'
+```
+
+##### Postman:
+- Método: `POST`
+- URL: `http://localhost:8080/api/avaliacoes`
+- No Body, escolha o formato `raw` e selecione `JSON`. Insira o seguinte JSON:
+
+```json
+{
+  "codigoVendedor": 1,
+  "pagamentos": [
+    {
+      "codigoCobranca": 1,
+      "valorPagamento": 100.00
+    }
+  ]
+}
+```
+
+- Clique em "Send" para executar a requisição.
+
+### 7. Encerramento
 
 Para encerrar todos os containers, execute o comando:
 
