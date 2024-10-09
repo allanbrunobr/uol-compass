@@ -1,4 +1,4 @@
-# Projeto: Sistema de Mensageria com RabbitMQ, Kafka, SQS e Zookeeper
+# Projeto: Sistema de Mensageria com RabbitMQ e SQS.
 
 Este projeto é um sistema de mensageria que utiliza RabbitMQ, SQS (AWS Simple Queue Service) , configurado para ser executado usando Docker. Abaixo você encontrará as instruções para baixar o código, configurar as credenciais da AWS e iniciar o ambiente Docker.
 
