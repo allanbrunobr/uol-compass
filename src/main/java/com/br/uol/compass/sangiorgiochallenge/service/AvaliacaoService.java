@@ -11,6 +11,8 @@ import com.br.uol.compass.sangiorgiochallenge.repository.CobrancaRepository;
 import com.br.uol.compass.sangiorgiochallenge.repository.VendedorRepository;
 import com.br.uol.compass.sangiorgiochallenge.service.messaging.MessageService;
 import com.br.uol.compass.sangiorgiochallenge.service.messaging.MessageServiceFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,9 @@ import java.util.List;
 
 @Service
 public class AvaliacaoService {
+
+    private static final Logger logger = LoggerFactory.getLogger(AvaliacaoService.class);
+
     private final VendedorRepository vendedorRepository;
     private final CobrancaRepository cobrancaRepository;
     private final MessageServiceFactory messageServiceFactory;
@@ -26,7 +31,6 @@ public class AvaliacaoService {
 
     public AvaliacaoService(VendedorRepository vendedorRepository,
                             CobrancaRepository cobrancaRepository,
-                            MessagingService messagingService,
                             MessageServiceFactory messageServiceFactory,
                             @Value("${message.service}") String messageServiceType) {
         this.vendedorRepository = vendedorRepository;
@@ -78,7 +82,7 @@ public class AvaliacaoService {
 
         }
         cobrancaRepository.save(cobranca);
-        System.out.println("Valor atualizado da cobrança (ID: " + cobranca.getId() + "): " + cobranca.getValorOriginal());
+        logger.info("Valor atualizado da cobrança (ID: {} - {}", cobranca.getId(), cobranca.getValorOriginal());
 
     }
 

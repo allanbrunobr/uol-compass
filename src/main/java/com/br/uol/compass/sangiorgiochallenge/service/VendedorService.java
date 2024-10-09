@@ -7,7 +7,6 @@ import com.br.uol.compass.sangiorgiochallenge.repository.VendedorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
 
 @Service
 public class VendedorService {
@@ -40,7 +39,7 @@ public class VendedorService {
                     cobrancaDTO.setValorOriginal(cobranca.getValorOriginal());
                     return cobrancaDTO;
                 })
-                .collect(Collectors.toList()));
+                .toList());
         return dto;
     }
 }

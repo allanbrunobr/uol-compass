@@ -2,7 +2,6 @@ package com.br.uol.compass.sangiorgiochallenge.controller;
 
 import com.br.uol.compass.sangiorgiochallenge.dto.AvaliacaoRequestDTO;
 import com.br.uol.compass.sangiorgiochallenge.dto.AvaliacaoResponseDTO;
-import com.br.uol.compass.sangiorgiochallenge.exception.CobrancaNaoEncontradaException;
 import com.br.uol.compass.sangiorgiochallenge.exception.CobrancasInvalidasException;
 import com.br.uol.compass.sangiorgiochallenge.exception.VendedorNaoEncontradoException;
 import com.br.uol.compass.sangiorgiochallenge.service.AvaliacaoService;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController

@@ -3,7 +3,6 @@ package com.br.uol.compass.sangiorgiochallenge.service.messaging;
 import com.br.uol.compass.sangiorgiochallenge.dto.PagamentoDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.stereotype.Service;
 
 //@Service
 public class KafkaService implements MessageService {
@@ -33,6 +32,6 @@ public class KafkaService implements MessageService {
         };
 
         kafkaTemplate.send(topic, pagamento);
-        System.out.println("Mensagem enviada para Kafka - Tópico: " + topic + " com status: " + pagamento.getStatusPagamento());
+            System.out.println("Mensagem enviada para Kafka - Tópico: " + topic + " com status: " + pagamento.getStatusPagamento());
     }
 }

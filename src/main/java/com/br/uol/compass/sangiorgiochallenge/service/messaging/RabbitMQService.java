@@ -1,12 +1,17 @@
 package com.br.uol.compass.sangiorgiochallenge.service.messaging;
 
 import com.br.uol.compass.sangiorgiochallenge.dto.PagamentoDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RabbitMQService implements MessageService {
+
+    private static final Logger logger = LoggerFactory.getLogger(RabbitMQService.class);
+
     private final RabbitTemplate rabbitTemplate;
     private final String exchangeName;
     private final String routingKeyParcial;
@@ -35,7 +40,7 @@ public class RabbitMQService implements MessageService {
         };
 
         rabbitTemplate.convertAndSend(exchangeName, routingKey, pagamento);
-        System.out.println("Mensagem enviada para RabbitMQ com status: " + pagamento.getStatusPagamento());
+        logger.info("Mensagem enviada para RabbitMQ com status: {}", pagamento.getStatusPagamento());
     }
 }
 
