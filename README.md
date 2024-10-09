@@ -1,6 +1,6 @@
 # Projeto: Sistema de Mensageria com RabbitMQ, Kafka, SQS e Zookeeper
 
-Este projeto é um sistema de mensageria que utiliza RabbitMQ, Kafka, SQS (AWS Simple Queue Service) e Zookeeper, configurado para ser executado usando Docker. Abaixo você encontrará as instruções para baixar o código, configurar as credenciais da AWS e iniciar o ambiente Docker.
+Este projeto é um sistema de mensageria que utiliza RabbitMQ, SQS (AWS Simple Queue Service) , configurado para ser executado usando Docker. Abaixo você encontrará as instruções para baixar o código, configurar as credenciais da AWS e iniciar o ambiente Docker.
 
 ## Requisitos
 
@@ -18,13 +18,13 @@ Antes de começar, você precisará ter as seguintes ferramentas instaladas:
 Primeiro, clone o repositório do projeto em seu ambiente local. No terminal, execute o comando abaixo:
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone https://github.com/allanbrunobr/uol-compass.git
 ```
 
 Navegue para o diretório do projeto:
 
 ```bash
-cd seu-repositorio
+cd /uol-compass
 ```
 
 ### 2. Configurar as Credenciais AWS
@@ -52,7 +52,7 @@ sqs:
 
 ### 3. Iniciar o Ambiente com Docker
 
-O ambiente de mensageria utiliza RabbitMQ, Kafka, Zookeeper e SQS. Para iniciar esses serviços com Docker, siga os passos abaixo.
+O ambiente de mensageria utiliza RabbitMQ e SQS. Para iniciar esses serviços com Docker, siga os passos abaixo.
 
 #### 3.1 Build e Execução do Docker
 
@@ -64,9 +64,9 @@ docker-compose up --build
 
 Este comando fará o seguinte:
 
-- Baixará as imagens do Docker necessárias para RabbitMQ, Kafka, Zookeeper e o próprio projeto.
+- Baixará as imagens do Docker necessárias para RabbitMQ.
 - Configurará os volumes para persistência de dados.
-- Iniciará os containers para RabbitMQ, Kafka e Zookeeper.
+- Iniciará os containers para RabbitMQ.
 
 #### 3.2 Verificar o Status dos Containers
 
@@ -76,7 +76,7 @@ Você pode verificar se todos os containers estão em execução com o comando:
 docker ps
 ```
 
-Isso mostrará os containers ativos, como `rabbitmq`, `kafka`, `zookeeper`, etc.
+Isso mostrará os containers ativos, como `rabbitmq`, etc.
 
 #### 3.3 Acessar a Interface de Administração do RabbitMQ
 
