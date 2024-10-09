@@ -28,8 +28,8 @@ spring:
       path: /h2-console
 
 aws:
-  access-key: AKIAW7XBDSGQB4MSN5VE
-  secret-key: 5zkdCe2ahy3cG9TiLuSOkh1lN7Gr1biB3WojX4Yr
+  access-key: YOUR_AWS_ACCESS_KEY
+  secret-key: YOUR_AWS_SECRET_KEY
   region: us-east-1
 
 sqs:
